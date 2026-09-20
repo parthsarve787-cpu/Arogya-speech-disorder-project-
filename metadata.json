@@ -1,0 +1,6 @@
+{
+  "name": "AarogyaSpeech AI",
+  "description": "AI-assisted personalized speech practice and rehabilitation-support platform for Hindi-speaking children with misarticulation difficulties.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

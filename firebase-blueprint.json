@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profiles for parents, therapists, admins and accounts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["child", "parent", "therapist", "admin"] },
+        "childId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "SpeechDigitalTwin": {
+      "title": "SpeechDigitalTwin",
+      "description": "Child's personalized Bayesian acoustic speech profile and phoneme mastery",
+      "type": "object",
+      "properties": {
+        "childId": { "type": "string" },
+        "overallMasteryScore": { "type": "number" },
+        "difficultSounds": { "type": "array", "items": { "type": "string" } },
+        "commonErrorPatterns": { "type": "array", "items": { "type": "string" } },
+        "currentDifficultyLadder": { "type": "string" },
+        "frustrationScore": { "type": "number" },
+        "lastUpdated": { "type": "string" }
+      },
+      "required": ["childId", "overallMasteryScore"]
+    },
+    "SpeechAnalysisResult": {
+      "title": "SpeechAnalysisResult",
+      "description": "Acoustic assessment records and GOP likelihood evaluations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "childId": { "type": "string" },
+        "targetWord": { "type": "string" },
+        "targetPhoneme": { "type": "string" },
+        "position": { "type": "string" },
+        "isMatch": { "type": "boolean" },
+        "confidence": { "type": "number" },
+        "gopScore": { "type": "number" },
+        "childFeedback": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "childId", "targetWord", "targetPhoneme", "gopScore"]
+    },
+    "CommunityPost": {
+      "title": "CommunityPost",
+      "description": "Parent and therapist peer support community discussions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "likesCount": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "authorName", "title", "content"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stored user account profiles"
+    },
+    "/speechDigitalTwins/{childId}": {
+      "schema": "SpeechDigitalTwin",
+      "description": "Individual speech digital twins"
+    },
+    "/speechAnalyses/{analysisId}": {
+      "schema": "SpeechAnalysisResult",
+      "description": "Practice session evaluations and GOP logs"
+    },
+    "/communityPosts/{postId}": {
+      "schema": "CommunityPost",
+      "description": "Community hub discussion posts"
+    }
+  }
+}

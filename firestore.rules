@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default fallback denies access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Speech Digital Twin records
+    match /speechDigitalTwins/{childId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Practice speech analyses
+    match /speechAnalyses/{analysisId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Community discussions
+    match /communityPosts/{postId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // System heartbeat & status check
+    match /system/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
